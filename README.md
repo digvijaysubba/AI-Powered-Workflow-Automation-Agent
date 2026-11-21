@@ -31,6 +31,9 @@ main.py (CLI)
 ## Installation
 
 ```bash
+git clone https://github.com/digvijaysubba/AI-Powered-Workflow-Automation-Agent.git
+cd AI-Powered-Workflow-Automation-Agent
+
 python -m venv .venv
 .venv\Scripts\activate        # Windows
 pip install -r requirements.txt

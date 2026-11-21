@@ -1,4 +1,4 @@
-"""CLI entry point for the AI Document Classifier."""
+"""CLI entry point for the AI-Powered Workflow Automation Agent."""
 
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ console = Console()
 
 @click.group()
 def cli():
-    """AI Document Classifier — Azure OpenAI + Microsoft Graph + Power Automate."""
+    """AI-Powered Workflow Automation Agent — Azure OpenAI + Microsoft Graph + Power Automate."""
 
 
 @cli.command()
