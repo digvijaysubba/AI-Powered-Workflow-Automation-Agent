@@ -1,6 +1,7 @@
 """Classifies documents and extracts entities using Azure OpenAI."""
 
 import json
+import os
 from dataclasses import dataclass, field
 
 from openai import AzureOpenAI
@@ -64,6 +65,15 @@ The JSON schema must be:
 """
 
 
+def _env_number(name: str, default: float, minimum: float, maximum: float) -> float:
+    """Read a number from the environment; fall back to `default` if missing or invalid."""
+    try:
+        value = float(os.getenv(name, "").strip() or default)
+    except ValueError:
+        return default
+    return max(minimum, min(maximum, value))
+
+
 @dataclass
 class ClassificationResult:
     document_type: str
@@ -80,6 +90,9 @@ def classify_document(text: str, config: AzureOpenAIConfig) -> ClassificationRes
         azure_endpoint=config.endpoint,
         api_key=config.api_key,
         api_version=config.api_version,
+        # Fail fast instead of hanging: seconds per request, and how many retries.
+        timeout=_env_number("AZURE_OPENAI_TIMEOUT_SECONDS", 30, 1, 300),
+        max_retries=int(_env_number("AZURE_OPENAI_MAX_RETRIES", 2, 0, 5)),
     )
 
     # Truncate to ~12 000 tokens worth of characters to stay within context limits
