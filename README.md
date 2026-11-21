@@ -1,4 +1,4 @@
-# AI Document Classifier
+# AI-Powered Workflow Automation Agent
 
 Classifies PDF and Word documents using **Azure OpenAI**, extracts key entities, and outputs a structured **Power Automate** flow payload. Optionally integrates with **Microsoft Graph API** to read/send Microsoft 365 data.
 
